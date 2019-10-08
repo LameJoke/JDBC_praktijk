@@ -25,7 +25,7 @@ public class OrderDaoImpl implements OrderDao {
         try(PreparedStatement statement = createConnection().prepareStatement("INSERT INTO order(status,creation_date, customer_id) " +
                 "VALUES (?,?,?)",Statement.RETURN_GENERATED_KEYS)){
             statement.setString(1,order.getStatus());
-            statement.setDate(2, (Date) order.getDate());
+            statement.setString(2, order.getDate());
             statement.setInt(3,order.getCustomer().getCustomerId());
             statement.execute();
         }
@@ -40,7 +40,7 @@ public class OrderDaoImpl implements OrderDao {
                 while (resultSet.next()){
                     Order order = new Order();
                     order.setStatus(resultSet.getString("status"));
-                    order.setDate(resultSet.getDate("creation_date"));
+                    order.setDate(resultSet.getString("creation_date"));
                     order.setCustomer(customerDao.getCustomer(customerId));
                     orders.add(order);
                 }
@@ -101,7 +101,6 @@ public class OrderDaoImpl implements OrderDao {
                 order.getCustomer().setCustomerId(resultSet.getInt("customer_id"));
                 order.setStatus(resultSet.getString(resultSet.getString("status")));
                 order.setOrderId(resultSet.getInt(resultSet.getInt("order_id")));
-                customer.getFirstName(resultSet.getString());
 
             }
         }

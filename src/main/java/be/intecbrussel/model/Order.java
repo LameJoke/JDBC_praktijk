@@ -6,19 +6,19 @@ public class Order {
 
     private int orderId;
     private String status;
-    private Date date;
+    private String date;
     private Customer customer;
 
     public Order() {
     }
 
-    public Order(String status, Customer customer) {
+    public Order(String status,String date, Customer customer) {
         this.status = status;
-
+        this.date = date;
         this.customer = customer;
     }
 
-    public Order(int id, String status, Date date) {
+    public Order(int id, String status, String date) {
     }
 
     public int getOrderId() {
@@ -40,11 +40,11 @@ public class Order {
         return this;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Order setDate(Date date) {
+    public Order setDate(String date) {
         this.date = date;
         return this;
     }
