@@ -34,11 +34,8 @@ public class App {
         }
 
 
-
-        OrderItem orderItem1 = new OrderItem();
-
-        Order ord1 = new Order("Ready for take off",2019/10/07,cust1);
-
+        Order ord1 = new Order("Ready for take of","2019/10/08",cust1);
+        Order ord2 = new Order("Preparing","2019/10/07", cust2);
 
         try {
             orderService.createOrder(ord1);
@@ -47,7 +44,11 @@ public class App {
             e.printStackTrace();
         }
 
-
+//        try {
+//            orderService.findById(1);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 //        try {
 //            customerService.deleteCustomer(1);
 //        } catch (SQLException e) {

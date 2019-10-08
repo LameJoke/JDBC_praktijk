@@ -9,17 +9,31 @@ public class Order {
     private String date;
     private Customer customer;
 
-    public Order() {
-    }
 
-    public Order(String status,String date, Customer customer) {
+    public Order(){
+
+    }
+    public Order(int id, String status, String date) {
+        this.orderId = id;
+        this.status=status;
+        this.date = date;
+
+    }
+    public Order(String status, String date, Customer customer) {
         this.status = status;
         this.date = date;
         this.customer = customer;
     }
 
-    public Order(int id, String status, String date) {
+
+
+    public Order(int id, String status, String date, Customer customer) {
+        this.orderId = id;
+        this.status=status;
+        this.date = date;
+        this.customer=customer;
     }
+
 
     public int getOrderId() {
         return orderId;

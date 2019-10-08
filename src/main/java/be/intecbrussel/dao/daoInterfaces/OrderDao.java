@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrderDao {
 
-    void createOrder (Order order) throws SQLException;
+    Order createOrder (Order order) throws SQLException;
 
     List<Order> readOrderByCustomerId (int customerId) throws SQLException;
 

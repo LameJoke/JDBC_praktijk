@@ -21,13 +21,23 @@ public class OrderDaoImpl implements OrderDao {
 
 
     @Override
-    public void createOrder(Order order) throws SQLException {
-        try(PreparedStatement statement = createConnection().prepareStatement("INSERT INTO order(status,creation_date, customer_id) " +
+    public Order createOrder(Order order) throws SQLException {
+        try(PreparedStatement statement = createConnection()
+                .prepareStatement("INSERT INTO order(status,creation_date, customer_id) " +
                 "VALUES (?,?,?)",Statement.RETURN_GENERATED_KEYS)){
             statement.setString(1,order.getStatus());
             statement.setString(2, order.getDate());
             statement.setInt(3,order.getCustomer().getCustomerId());
             statement.execute();
+
+            try(ResultSet resultSet = statement.getGeneratedKeys()){
+                if(resultSet.next()){
+                    int id = resultSet.getInt(1);
+                    return new Order(id, order.getStatus(),order.getDate(),order.getCustomer());
+                }else{
+                    return null;
+                }
+            }
         }
     }
 
@@ -89,15 +99,15 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order findById(int orderId) throws SQLException {
        Order order = null;
-       Customer customer;
-       Product product;
+//       Customer customer;
+//       Product product;
         try(PreparedStatement preparedStatement = createConnection().prepareStatement("SELECT * FROM order WHERE order_id=?")){
             preparedStatement.setInt(1, orderId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 order = new Order();
-                customer = new Customer();
-                product = new Product();
+//                customer = new Customer();
+//                product = new Product();
                 order.getCustomer().setCustomerId(resultSet.getInt("customer_id"));
                 order.setStatus(resultSet.getString(resultSet.getString("status")));
                 order.setOrderId(resultSet.getInt(resultSet.getInt("order_id")));

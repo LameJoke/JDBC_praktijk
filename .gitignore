@@ -6,7 +6,7 @@
 
 # Intellij
 
-.idea/
+.idea
 *.iws
 
 # Mac
