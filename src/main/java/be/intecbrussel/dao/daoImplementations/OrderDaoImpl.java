@@ -23,7 +23,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order createOrder(Order order) throws SQLException {
         try(PreparedStatement statement = createConnection()
-                .prepareStatement("INSERT INTO order(status,creation_date, customer_id) " +
+                .prepareStatement("INSERT INTO `order`(status,creation_date, customer_id) " +
                 "VALUES (?,?,?)",Statement.RETURN_GENERATED_KEYS)){
             statement.setString(1,order.getStatus());
             statement.setString(2, order.getDate());

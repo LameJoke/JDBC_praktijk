@@ -75,10 +75,11 @@ public class CustomerDaoImpl implements CustomerDao {
     public Customer getCustomer(int id) throws SQLException {
         Customer customer;
         try(PreparedStatement preparedStatement = createConnection().prepareStatement("SELECT * FROM customer where customer_id=?")){
+            preparedStatement.setInt(1,id);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 customer = new Customer();
                 if(resultSet.next()){
-                    customer.setCustomerId(resultSet.getInt("id"));
+                    customer.setCustomerId(resultSet.getInt("customer_id"));
                     customer.setFirstName(resultSet.getString("firstName"));
                     customer.setLastName(resultSet.getString("lastName"));
                     customer.setEmail(resultSet.getString("email"));
